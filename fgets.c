@@ -11,8 +11,8 @@ int main(void) {
         printf("Erro na leitura do arquivo");
         return 1;
     }
-    while(!feof(arquivo)) {
-        resultado = fgets(nome, 100, arquivo); /*(!feof), enquanto nao for o fim do arquivo*/
+    while(!feof(arquivo)) {/*(!feof), enquanto nao for o fim do arquivo*/
+        resultado = fgets(nome, 100, arquivo); 
         if(resultado) printf("%s", nome);
     }
     fclose(arquivo);
