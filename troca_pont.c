@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <errno.h> /*biblioteca de erros possiveis de acontecer envolvendo arquivos*/
 
 int troca(int *i, int *j){
     int temp;
