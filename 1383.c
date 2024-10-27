@@ -67,7 +67,7 @@ int main(void){
     for(m = 0; m<k; m++){
         for(i=0; i<9; i++){
             for(j=0; j<9; j++){
-                scanf("%d", &mat[m][i][j]);
+                scanf("%d", &mat[m][i][j]); /*vetor de matriz para guardar as instancias*/
             }
         }
     
