@@ -25,13 +25,6 @@ void inserir(char *compra, celula *head) {
     p->next = nova;
 }
 
-/*void imprimir(celula *head){
-    celula *p;
-    for(p = head->next; p != NULL; p = p->next)
-        printf ("%s\n", p->lista);
-
-}
-*/
 void imprimir(celula *head) {
     celula *p = head->next;
     int first = 1;  // Variável para controle de espaço entre as palavras
@@ -53,7 +46,7 @@ void buscaRemove(celula *head){
     for(p = head->next; p != NULL && p->next != NULL; p = p->next){
         q = p;
         while(q->next != NULL){
-            if(strcmp(p->lista, q->next->lista) == 0){
+            if(strcmp(p->lista, q->next->lista)){
                 lixo = q->next;
                 q->next = lixo->next;
                 free(lixo->lista);
@@ -65,6 +58,25 @@ void buscaRemove(celula *head){
         }
     }       
 }
+/*
+void organiza(celula *head){
+    celula *p, *q;
+    for(p = head->next; p != NULL; p = p->next){
+        for(q = p->next; q != NULL; q = q->next){
+            if(strcmp(p->lista, q->lista) > 0){
+                char temp[MAX];
+                strcpy(temp, p->lista);
+                strcpy(p->lista, q->lista);
+                strcpy(q->lista, temp);
+
+
+            } 
+        }
+
+    }
+
+}
+*/
 int main(void){
     int n;
     char compra[MAX];
@@ -77,6 +89,9 @@ int main(void){
  
     for(int i=0; i<n; i++){
         fgets(compra, MAX, stdin);
+    
+        compra[strcspn(compra, "\n")] = '\0';
+        
         celula *head;
         head = malloc(sizeof(celula));
         head->next = NULL;
@@ -87,6 +102,8 @@ int main(void){
             item = strtok(NULL, " ");
         }
         buscaRemove(head);
+        //organiza(head);
+
         imprimir(head);
         
         celula *p = head;
