@@ -25,31 +25,25 @@ void inserir(char *compra, celula *head) {
     p->next = nova;
 }
 
-void imprimir(celula *head) {
-    celula *p = head->next;
-    int first = 1;  // Variável para controle de espaço entre as palavras
-
-    while (p != NULL) {
-        if (!first) {
-            printf(" ");
-        }
-        printf("%s", p->lista);
-        first = 0;
-        p = p->next;
-    }
-    printf("\n");
+void imprimir(celula *head){
+    celula *p;
+    for(p = head->next; p != NULL; p = p->next)
+        if(p->next == NULL)
+            printf ("%s\n", p->lista);
+        else
+            printf ("%s ", p->lista);
+        
 }
-
 
 void buscaRemove(celula *head){
     celula *p, *q, *lixo;
     for(p = head->next; p != NULL && p->next != NULL; p = p->next){
         q = p;
         while(q->next != NULL){
-            if(strcmp(p->lista, q->next->lista)){
+            if(strcmp(p->lista, q->next->lista) == 0){
                 lixo = q->next;
                 q->next = lixo->next;
-                free(lixo->lista);
+
                 free(lixo);
             } else{
                 q = q->next;
@@ -58,7 +52,7 @@ void buscaRemove(celula *head){
         }
     }       
 }
-/*
+
 void organiza(celula *head){
     celula *p, *q;
     for(p = head->next; p != NULL; p = p->next){
@@ -76,7 +70,7 @@ void organiza(celula *head){
     }
 
 }
-*/
+
 int main(void){
     int n;
     char compra[MAX];
@@ -102,7 +96,7 @@ int main(void){
             item = strtok(NULL, " ");
         }
         buscaRemove(head);
-        //organiza(head);
+        organiza(head);
 
         imprimir(head);
         
@@ -110,11 +104,11 @@ int main(void){
         while (p != NULL) {
             celula *temp = p;
             p = p->next;
-            free(temp->lista);
             free(temp);
         }
-    }       
 
+        free(head);
+    }       
 
     return 0;
 }
