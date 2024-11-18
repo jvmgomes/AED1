@@ -1,14 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define MAX 999 
+#define MAX 21001
 
 typedef struct cel celula;
-struct cel
-{
+struct cel {
     char *lista;
     struct cel *next;
-    
 };
 
 void inserir(char *compra, celula *head) {
@@ -17,7 +15,6 @@ void inserir(char *compra, celula *head) {
     strcpy(nova->lista, compra);
     nova->next = NULL;
 
-
     celula *p = head;
     while (p->next != NULL) {
         p = p->next;
@@ -25,90 +22,80 @@ void inserir(char *compra, celula *head) {
     p->next = nova;
 }
 
-void imprimir(celula *head){
+void imprimir(celula *head) {
     celula *p;
-    for(p = head->next; p != NULL; p = p->next)
-        if(p->next == NULL)
-            printf ("%s\n", p->lista);
+    for (p = head->next; p != NULL; p = p->next) {
+        if (p->next == NULL)
+            printf("%s\n", p->lista);
         else
-            printf ("%s ", p->lista);
-        
+            printf("%s ", p->lista);
+    }
 }
 
-void buscaRemove(celula *head){
+void removeDuplicados(celula *head) {
     celula *p, *q, *lixo;
-    for(p = head->next; p != NULL && p->next != NULL; p = p->next){
+    for (p = head->next; p != NULL && p->next != NULL; p = p->next) {
         q = p;
-        while(q->next != NULL){
-            if(strcmp(p->lista, q->next->lista) == 0){
+        while (q->next != NULL) {
+            if (strcmp(p->lista, q->next->lista) == 0) {
                 lixo = q->next;
                 q->next = lixo->next;
-
                 free(lixo);
-            } else{
+            } else {
                 q = q->next;
-
+        
             }
         }
-    }       
+    }
 }
 
-void organiza(celula *head){
+void organiza(celula *head) {
     celula *p, *q;
-    for(p = head->next; p != NULL; p = p->next){
-        for(q = p->next; q != NULL; q = q->next){
-            if(strcmp(p->lista, q->lista) > 0){
+    for (p = head->next; p != NULL; p = p->next) {
+        for (q = p->next; q != NULL; q = q->next) {
+            if (strcmp(p->lista, q->lista) > 0) {
                 char temp[MAX];
                 strcpy(temp, p->lista);
                 strcpy(p->lista, q->lista);
                 strcpy(q->lista, temp);
-
-
-            } 
+            }
         }
-
     }
-
 }
 
-int main(void){
+int main(void) {
     int n;
     char compra[MAX];
     char *item;
 
-    scanf("%d", &n);
-    getchar();
-    
+    celula *head = malloc(sizeof(celula));
+    head->next = NULL;
 
- 
-    for(int i=0; i<n; i++){
+    scanf("%d", &n);
+
+    for (int i = 0; i <= n; i++) {
         fgets(compra, MAX, stdin);
-    
         compra[strcspn(compra, "\n")] = '\0';
-        
-        celula *head;
-        head = malloc(sizeof(celula));
-        head->next = NULL;
 
         item = strtok(compra, " ");
-        while(item != NULL){
+        while (item != NULL) {
             inserir(item, head);
             item = strtok(NULL, " ");
         }
-        buscaRemove(head);
+        removeDuplicados(head);
         organiza(head);
 
         imprimir(head);
-        
-        celula *p = head;
-        while (p != NULL) {
-            celula *temp = p;
-            p = p->next;
+
+        celula *temp;
+        while (head->next != NULL) {
+            temp = head->next;
+            head->next = temp->next;
             free(temp);
+
         }
+    }
 
-        free(head);
-    }       
-
+    free(head);
     return 0;
 }
