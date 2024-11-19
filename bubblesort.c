@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int bubblesort(int vet[], int n){
     int temp;
