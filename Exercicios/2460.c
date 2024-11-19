@@ -7,19 +7,14 @@ struct cel {
     struct cel *next;
 };
 
-void inserir(int num, celula *head){
-    celula *nova = malloc(sizeof(celula));
-    
-    
-    nova->valor = num;
-    nova->next = NULL;
-    
-    celula *p = head; //inserção dos numeros no final da lista
-    while(p->next != NULL)
-        p = p->next;
-
-    p->next = nova;    
+void inserir(int y, celula *p){    
+    celula *nova;
+    nova = malloc(sizeof(celula));   
+    nova->valor = y;
+    nova->next = p->next;
+    p->next = nova;
 }
+
 
 void busca_remove (int num, celula *head){
     celula *p = head;
@@ -53,10 +48,12 @@ int main(void){
     celula *head = (celula *)malloc(sizeof(celula)); //gera uma cabeça
     head->next = NULL;
 
+    celula *prox = head;
     scanf("%d", &n); 
     for(int i=0; i<n; i++){
         scanf("%d", &num_n);
-        inserir(num_n, head); //inserção dos itens na lista encadeada
+        inserir(num_n, prox); //inserção dos itens na lista encadeada
+        prox = prox->next;
     }
 
     scanf("%d",&m);
@@ -67,6 +64,5 @@ int main(void){
 
     imprimir(head); //impressão da lista atualizada
 
-    free(head);
     return 0;
 }
