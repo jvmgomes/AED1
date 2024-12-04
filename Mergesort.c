@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 
 void Intercala (int p, int q, int r, int v[]) {
     int i, j, k, *w;
