@@ -1,3 +1,4 @@
+//João Vitor Moreira Gomes RA:176536
 #include <stdio.h>
 #define PRIMO_LIMITE 32612
 #define LIMITE 3502
