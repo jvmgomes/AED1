@@ -1,3 +1,4 @@
+//João Vitor Moreira Gomes RA:176536
 #include <string.h>
 #include <stdio.h>
 #include <ctype.h>
