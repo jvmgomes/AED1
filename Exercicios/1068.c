@@ -19,8 +19,10 @@ int main(){
             }
         }
 
-        if(i == tam && parenteses == 0) printf("correct\n");
-        else                            printf("incorrect\n");
+        if(i == tam && parenteses == 0)
+            printf("correct\n");
+        else                            
+            printf("incorrect\n");
     }
 
     return 0;
