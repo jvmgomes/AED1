@@ -3,17 +3,17 @@
 #include <stdio.h>
 
 int main(){
-    char expressao[1001];
+    char express[1001];
     int i, tam, parenteses;
 
-    while(scanf("%s\n", &expressao) != EOF){
+    while(scanf("%s\n", &express) != EOF){
         parenteses = 0;
-        tam = strlen(expressao);
+        tam = strlen(express);
 
         for(i = 0; i < tam; ++i){
-            if(expressao[i] == '('){
+            if(express[i] == '('){
                 ++parenteses;
-            }else if(expressao[i] == ')'){
+            }else if(express[i] == ')'){
                 if(parenteses > 0)  --parenteses;
                 else                break;
             }
